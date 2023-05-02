@@ -20,9 +20,9 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
     Timer: bpy.props.FloatProperty(
         name="Timer",
         description="A slider for the timers",
-        default=30.0,
+        default=1.0,
         min=0.0,
-        max=3600.0,
+        max=10.0,
         soft_min=0.0,
         soft_max=5.0,
         step=1,
