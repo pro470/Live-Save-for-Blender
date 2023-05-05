@@ -23,9 +23,12 @@ def build_new_file_path():
 
 
 def match_in_timestep():
-    timestep_regex = r"\d{4}\.\d{2}\.\d{2}_\d{2}-\d{2}-\d{2}"
-    matched1 = re.search(timestep_regex, bpy.context.window_manager.my_addon_props.file_path)
-    return matched1
+    if os.path.exists(bpy.context.window_manager.my_addon_props.file_path):
+        timestep_regex = r"\d{4}\.\d{2}\.\d{2}_\d{2}-\d{2}-\d{2}"
+        matched1 = re.search(timestep_regex, bpy.context.window_manager.my_addon_props.file_path)
+        return matched1
+    else:
+        return False
 
 
 def create_new_file_path():
