@@ -1,3 +1,5 @@
+import threading
+
 import bpy
 from .. import utils
 import importlib
@@ -11,6 +13,7 @@ class LiveSaveMessageHandler(bpy.types.Operator):
     bl_label = "Live Save Message Handler"
 
     _timer = None
+    is_running = False
     is_other_script: bpy.props.BoolProperty(default=False)
     onlyonce: bpy.props.BoolProperty(default=False)
 
@@ -34,10 +37,9 @@ class LiveSaveMessageHandler(bpy.types.Operator):
                 print("i was called")
                 self.properties.is_other_script = True
             if bpy.data.is_dirty or self.is_other_script:
-                utils.saving_function.save_blend_file()
-                utils.saving_function.save_image_textures()
-                utils.saving_function.save_image_udim_textures()
-                self.properties.is_other_script = False
+                if not self.is_running:
+                    self.is_running = True
+                    threading.Thread(target=self.my_thread_function).start()
         return {'PASS_THROUGH'}
 
     def execute(self, context):
@@ -45,18 +47,26 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         wm = context.window_manager
         self._timer = wm.event_timer_add(addon_prefs.Timer, window=context.window)
         wm.modal_handler_add(self)
-        bpy.app.handlers.undo_pre.append(handlers.undo_redo.redo_handler)
+        bpy.app.handlers.undo_post.append(handlers.undo_redo.redo_handler)
         bpy.app.handlers.redo_post.append(handlers.undo_redo.redo_handler)
+        bpy.ops.wm.user_action_detector('EXEC_DEFAULT')
 
         return {'RUNNING_MODAL'}
 
     def cancel(self, context):
         wm = context.window_manager
         wm.event_timer_remove(self._timer)
-        bpy.app.handlers.undo_pre.remove(handlers.undo_redo.redo_handler)
+        bpy.app.handlers.undo_post.remove(handlers.undo_redo.redo_handler)
         bpy.app.handlers.redo_post.remove(handlers.undo_redo.redo_handler)
 
         return {'CANCELLED'}
+
+    def my_thread_function(self):
+        utils.saving_function.save_blend_file()
+        utils.saving_function.save_image_textures()
+        utils.saving_function.save_image_udim_textures()
+        self.properties.is_other_script = False
+        self.is_running = False
 
     @property
     def timer(self):

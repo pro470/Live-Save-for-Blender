@@ -1,6 +1,7 @@
 import bpy
 from . import preference
-from .. import utils
+from ..utils import file_path
+
 
 
 class LiveSavePreferences(bpy.types.AddonPreferences):
@@ -40,7 +41,7 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
     livesavede: bpy.props.StringProperty(
         name='Live Save Directory',
         description='The directory where initial saves will be stored',
-        default=utils.file_path.get_default_path(),
+        default=file_path.get_default_path(),
         subtype='FILE_PATH'
     )
 
