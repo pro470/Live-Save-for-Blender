@@ -9,8 +9,6 @@ class UserActionDetector(bpy.types.Operator):
     bl_idname = "wm.user_action_detector"
     bl_label = "User Action Detector"
 
-    _timer = None
-
     def modal(self, context, event):
         if event.type in {'LEFTMOUSE', 'RIGHTMOUSE'} and event.value == 'RELEASE':
             print("User action detected")
@@ -20,17 +18,7 @@ class UserActionDetector(bpy.types.Operator):
                 self.cancel(context)
                 return {'CANCELLED'}
 
-        if event.type in {'ESC'}:
-            self.cancel(context)
-            return {'CANCELLED'}
-
         return {'PASS_THROUGH'}
-
-    def execute(self, context):
-        wm = context.window_manager
-        self._timer = wm.event_timer_add(0.1, window=context.window)
-        wm.modal_handler_add(self)
-        return {'RUNNING_MODAL'}
 
     def cancel(self, context):
         wm = context.window_manager

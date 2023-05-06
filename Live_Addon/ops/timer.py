@@ -1,5 +1,6 @@
+import datetime
 import threading
-
+import pprint
 import bpy
 from .. import utils
 import importlib
@@ -14,7 +15,6 @@ class LiveSaveMessageHandler(bpy.types.Operator):
 
     _timer = None
     is_running = False
-    is_other_script: bpy.props.BoolProperty(default=False)
     onlyonce: bpy.props.BoolProperty(default=False)
 
     def update_timer(self, context):
@@ -33,10 +33,7 @@ class LiveSaveMessageHandler(bpy.types.Operator):
                 self.cancel(context)
                 return {'CANCELLED'}
             self.update_timer(context)
-            if utils.comparison.check_undo_redo(context):
-                print("i was called")
-                self.properties.is_other_script = True
-            if bpy.data.is_dirty or self.is_other_script:
+            if bpy.data.is_dirty or utils.comparison.check_undo_redo(context):
                 if not self.is_running:
                     self.is_running = True
                     threading.Thread(target=self.my_thread_function).start()
@@ -62,10 +59,15 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         return {'CANCELLED'}
 
     def my_thread_function(self):
+        start_time = datetime.datetime.now()
         utils.saving_function.save_blend_file()
         utils.saving_function.save_image_textures()
         utils.saving_function.save_image_udim_textures()
-        self.properties.is_other_script = False
+        end_time = datetime.datetime.now()
+        execution_time = end_time - start_time
+        if execution_time > datetime.timedelta(seconds=1):
+            addon_prefs = props_module.prefs()
+            addon_prefs.Timer = 10
         self.is_running = False
 
     @property
