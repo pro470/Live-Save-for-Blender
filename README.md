@@ -1,4 +1,4 @@
-I DO NOT SAVE MY BLENDER PROJECT.
+I DO NOT SAVE MY BLENDER PROJECTS.
 
 As an aspiring VFX artist, I was always looking for ways to improve my skills and workflow. I started learning Blender, but as a beginner entrepreneur, I didn't have the high-end hardware to handle the software, which would often crash and cause me to lose progress. Despite my frustrations, I was determined to learn Blender and take my skills to the next level.
 
