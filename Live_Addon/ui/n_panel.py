@@ -22,23 +22,40 @@ class LiveSavePanel(bpy.types.Panel):
 
         layout.separator()
 
-        row = layout.row()
-        row.prop(addon_prefs, "Timer", text="Timer")
+        #only draw when dynamic save is enabled
+        if not addon_prefs.dynamic_save:
+            row = layout.row()
+            row.prop(addon_prefs, "Timer", text="Timer")
 
-        layout.separator()
+            layout.separator()
 
         row = layout.row()
         row.prop(myaddonprops, "is_enabled_version", text="Enable Version")
 
         layout.separator()
 
+        #only draw when version is enabled
+        if not myaddonprops.is_enabled_version:
+            row = layout.row()
+            row.prop(myaddonprops, "version_count", text="Versions Count")
+
+            layout.separator()
+
+            row = layout.row()
+            row.prop(myaddonprops, "version_timer", text="Timer Version")
+
+            layout.separator()
+
         row = layout.row()
-        row.prop(myaddonprops, "version_count", text="Versions Count")
+        row.prop(addon_prefs, "background_save", text="Background Save")
 
         layout.separator()
 
         row = layout.row()
-        row.prop(myaddonprops, "version_timer", text="Timer Version")
+        row.prop(addon_prefs, "dynamic_save", text="dynamic Save")
+
+        layout.separator()
+        layout.operator("wm.save_as_mainfile_with_browser")
 
         layout.separator()
 
@@ -60,7 +77,3 @@ class LiveSavePanel(bpy.types.Panel):
                 layout.label(text=f"Saved at {last_save_time:%Y-%m-%d %H:%M:%S}")
             else:
                 layout.label(text="Edited", icon='ERROR')
-
-        layout.separator()
-        layout.operator("wm.save_as_mainfile_with_browser")
-

@@ -38,7 +38,8 @@ class LiveSaveMessageHandler(bpy.types.Operator):
                     self.is_running = True
                     p = threading.Thread(target=self.my_thread_function)
                     p.start()
-                    p.join()
+                    if not addon_prefs.background_save:
+                        p.join()
         return {'PASS_THROUGH'}
 
     def execute(self, context):
@@ -66,12 +67,14 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         utils.saving_function.save_image_udim_textures()
         end_time = datetime.datetime.now()
         execution_time = end_time - start_time
-        addon_prefs = props_module.prefs()
-        if execution_time > datetime.timedelta(seconds=1):
-            addon_prefs.Timer = 10
-        elif execution_time < datetime.timedelta(seconds=1):
-            addon_prefs.Timer = 1
-        self.is_running = False
+        dyn_save = bpy.context.window_manager.my_addon_props.dynamic_save
+        if dyn_save:
+            addon_prefs = props_module.prefs()
+            if execution_time > datetime.timedelta(seconds=1):
+                addon_prefs.Timer = 10
+            elif execution_time < datetime.timedelta(seconds=1):
+                addon_prefs.Timer = 1
+            self.is_running = False
 
     @property
     def timer(self):

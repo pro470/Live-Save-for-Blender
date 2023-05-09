@@ -45,8 +45,22 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         subtype='FILE_PATH'
     )
 
+    background_save: bpy.props.BoolProperty(
+        name="Background Save",
+        description="Enable or disable Background Save(when on data lost can happen)",
+        default=False,
+    )
+
+    dynamic_save: bpy.props.BoolProperty(
+        name="Dynamic Save",
+        description="Enable or disable Dynamic Save",
+        default=True,
+    )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "is_enabled")
         layout.prop(self, "Timer")
         layout.prop(self, "livesavede")
+        layout.prop(self, "background_save")
+        layout.prop(self, "dynamic_save")
