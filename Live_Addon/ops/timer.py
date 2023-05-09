@@ -67,14 +67,14 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         utils.saving_function.save_image_udim_textures()
         end_time = datetime.datetime.now()
         execution_time = end_time - start_time
-        dyn_save = bpy.context.window_manager.my_addon_props.dynamic_save
+        addon_prefs = props_module.prefs()
+        dyn_save = addon_prefs.dynamic_save
         if dyn_save:
-            addon_prefs = props_module.prefs()
             if execution_time > datetime.timedelta(seconds=1):
                 addon_prefs.Timer = 10
             elif execution_time < datetime.timedelta(seconds=1):
                 addon_prefs.Timer = 1
-            self.is_running = False
+        self.is_running = False
 
     @property
     def timer(self):
