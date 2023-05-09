@@ -15,6 +15,7 @@ class LiveSavePanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         addon_prefs = props.preference.prefs()
+        myaddonprops = bpy.context.window_manager.my_addon_props
 
         row = layout.row()
         row.prop(addon_prefs, "is_enabled", text="Enable Live Save")
@@ -23,6 +24,23 @@ class LiveSavePanel(bpy.types.Panel):
 
         row = layout.row()
         row.prop(addon_prefs, "Timer", text="Timer")
+
+        layout.separator()
+
+        row = layout.row()
+        row.prop(myaddonprops, "is_enabled_version", text="Enable Version")
+
+        layout.separator()
+
+        row = layout.row()
+        row.prop(myaddonprops, "version_count", text="Versions Count")
+
+        layout.separator()
+
+        row = layout.row()
+        row.prop(myaddonprops, "version_timer", text="Timer Version")
+
+        layout.separator()
 
         if addon_prefs.is_enabled:
             layout.operator("wm.live_save_message_handler", text="Start Live Save", emboss=False)

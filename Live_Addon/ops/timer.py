@@ -36,7 +36,9 @@ class LiveSaveMessageHandler(bpy.types.Operator):
             if bpy.data.is_dirty or utils.comparison.check_undo_redo(context):
                 if not self.is_running:
                     self.is_running = True
-                    threading.Thread(target=self.my_thread_function).start()
+                    p = threading.Thread(target=self.my_thread_function)
+                    p.start()
+                    p.join()
         return {'PASS_THROUGH'}
 
     def execute(self, context):
@@ -47,7 +49,6 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         bpy.app.handlers.undo_post.append(handlers.undo_redo.redo_handler)
         bpy.app.handlers.redo_post.append(handlers.undo_redo.redo_handler)
         bpy.ops.wm.user_action_detector('EXEC_DEFAULT')
-
         return {'RUNNING_MODAL'}
 
     def cancel(self, context):
