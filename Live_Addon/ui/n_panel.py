@@ -35,7 +35,7 @@ class LiveSavePanel(bpy.types.Panel):
         layout.separator()
 
         #only draw when version is enabled
-        if not myaddonprops.is_enabled_version:
+        if myaddonprops.is_enabled_version:
             row = layout.row()
             row.prop(myaddonprops, "version_count", text="Versions Count")
 
