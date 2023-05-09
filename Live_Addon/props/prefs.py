@@ -22,7 +22,7 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         name="Timer",
         description="A slider for the timers",
         default=1.0,
-        min=0.2,
+        min=0.1,
         max=10.0,
         soft_min=0.0,
         soft_max=5.0,
