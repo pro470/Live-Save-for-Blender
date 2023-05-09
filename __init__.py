@@ -5,7 +5,7 @@ bl_info = {
     "version": (0, 1),
     "blender": (3, 3, 0),
     "location": "View3D > UI panel",
-    "warning": "",
+    "warning": "Experimental",
     "category": "System"
 }
 
