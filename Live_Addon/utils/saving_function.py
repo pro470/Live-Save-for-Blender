@@ -73,10 +73,20 @@ def save_blend_file():
             os.rename(bpy.context.window_manager.my_addon_props.file_path, new_file_path)
             print("i deleted")
             bpy.context.window_manager.my_addon_props.file_path = new_file_path
+            if os.path.exists(bpy.context.window_manager.my_addon_props.file_path_version):
+                new_version_folder = fph.create_new_file_path_version()
+                os.rename(bpy.context.window_manager.my_addon_props.file_path_version, new_version_folder)
+                bpy.context.window_manager.my_addon_props.file_path_version = new_version_folder
+            elif bpy.context.window_manager.my_addon_props.is_enabled_version:
+                new_version_folder = fph.create_new_file_path_version()
+                bpy.context.window_manager.my_addon_props.file_path_version = new_version_folder
         else:
             bpy.context.window_manager.my_addon_props.file_path = fph.create_new_file_path()
             print("wrong place")
             save_to_file(bpy.context.window_manager.my_addon_props.file_path)
+            if bpy.context.window_manager.my_addon_props.is_enabled_version:
+                new_version_folder = fph.create_new_file_path_version()
+                bpy.context.window_manager.my_addon_props.file_path_version = new_version_folder
         # write all materials, textures and node groups to a library
         data_blocks = {
             *bpy.data.meshes,

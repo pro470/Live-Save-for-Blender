@@ -8,6 +8,13 @@ class MyAddonProperties(bpy.types.PropertyGroup):
         description="Enter file path",
         default="Bernd"
     )
+
+    file_path_version: bpy.props.StringProperty(
+        name="File Path Version",
+        description="Enter file path",
+        default="Bernd"
+    )
+
     exec_count: bpy.props.IntProperty(
         name="exec count",
         description='The count or the the undo/redo',
@@ -48,3 +55,5 @@ class MyAddonProperties(bpy.types.PropertyGroup):
         step=1,
         min=1
     )
+
+

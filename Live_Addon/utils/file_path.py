@@ -38,6 +38,22 @@ def create_new_file_path():
     created_filepath = os.path.join(addonpref.livesavede, file_name + current_time + ".blend")
     return created_filepath
 
+def create_new_file_path_version():
+    project_name = os.path.splitext(os.path.basename(bpy.context.window_manager.my_addon_props.file_path))[0]
+
+    # Create the version folder name with the project name and version count
+    version_folder_name = f"{project_name}_version_folder"
+
+    # Create the full path for the version folder
+    version_folder_path = os.path.join(os.path.dirname(bpy.context.window_manager.my_addon_props.file_path), version_folder_name)
+
+    return version_folder_path
+
+def build_new_file_path_version():
+    current_time = bpy.context.window_manager.my_addon_prop.file_path
+    timestep_regex = r"\d{4}\.\d{2}\.\d{2}_\d{2}-\d{2}-\d{2}"
+    new_path = re.sub(timestep_regex, current_time, bpy.context.window_manager.my_addon_props.file_path_version)
+    return new_path
 
 # file_name = "live_backup"
 # current_time = datetime.datetime.now().strftime("%Y.%m.%d_%H-%M-%S")

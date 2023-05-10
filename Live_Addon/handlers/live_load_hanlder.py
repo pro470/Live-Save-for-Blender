@@ -15,6 +15,6 @@ def auto_start(dummy):
         bpy.ops.wm.live_save_message_handler('EXEC_DEFAULT')
         bpy.ops.wm.user_action_detector('EXEC_DEFAULT')
     else:
-        if bpy.context.window_manager.my_addon_props.is_enabled:
+        if bpy.context.window_manager.my_addon_props.is_enabled_version:
             if not bpy.app.timers.is_registered(sv.save_version):
                 bpy.app.timers.register(sv.save_version, first_interval=bpy.context.window_manager.my_addon_props.version_timer, persistent=True)

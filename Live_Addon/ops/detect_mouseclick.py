@@ -5,7 +5,6 @@ from .. import props
 props_module = props.preference
 
 
-
 class UserActionDetector(bpy.types.Operator):
     bl_idname = "wm.user_action_detector"
     bl_label = "User Action Detector"
@@ -20,13 +19,11 @@ class UserActionDetector(bpy.types.Operator):
                 return {'CANCELLED'}
 
         return {'PASS_THROUGH'}
-    
+
     def execute(self, context):
         wm = context.window_manager
         wm.modal_handler_add(self)
         return {'RUNNING_MODAL'}
-        
 
     def cancel(self, context):
-        wm = context.window_manager
-        wm.event_timer_remove(self._timer)
+        return {'CANCELLED'}
