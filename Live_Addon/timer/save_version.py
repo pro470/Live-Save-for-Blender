@@ -14,7 +14,7 @@ def save_version():
     timestep_regex = r"\d{4}\.\d{2}\.\d{2}_\d{2}-\d{2}-\d{2}"
     matched_blend = re.search(blend_match, file_path12)
     # Get the current Blender file path
-    if bpy.data.is_saved:
+    if bpy.data.is_saved and bpy.data.is_dirty:
         filepath = bpy.data.filepath
 
         # Extract the project name without the file extension
@@ -30,7 +30,7 @@ def save_version():
         if not os.path.exists(version_folder_path):
             os.makedirs(version_folder_path, exist_ok=True)
 
-    elif not os.path.isdir(file_path12) and matched_blend and os.path.exists(file_path12):
+    elif not os.path.isdir(file_path12) and matched_blend and os.path.exists(file_path12) and utils.comparison.compare_blend_data():
 
         version_folder_path = bpy.context.window_manager.my_addon_props.file_path_version
         # Extract name without the .blender extension but not with os.path.splitext
