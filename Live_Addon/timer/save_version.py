@@ -1,14 +1,17 @@
 import bpy
 import os
 import shutil
+from .. import utils
+from .. import props
+prefs = props.preference.prefs()
 
 
 def save_version():
     # Get the current Blender file path
     if bpy.data.is_saved:
         filepath = bpy.data.filepath
-    elif os.path.exists(bpy.context.window_manager.my_addon_props.file_path):
-        filepath = bpy.context.window_manager.my_addon_props.file_path
+    #elif os.path.exists(bpy.context.window_manager.my_addon_props.file_path) and bpy.context.window_manager.my_addon_props.file_path != utils.file_path.get_default_path() and prefs.is_enabled:
+        #filepath = bpy.context.window_manager.my_addon_props.file_path
     else:
         return bpy.context.window_manager.my_addon_props.version_timer
 
