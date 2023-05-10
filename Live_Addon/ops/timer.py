@@ -50,7 +50,6 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         wm.modal_handler_add(self)
         bpy.app.handlers.undo_post.append(handlers.undo_redo.redo_handler)
         bpy.app.handlers.redo_post.append(handlers.undo_redo.redo_handler)
-        bpy.ops.wm.user_action_detector('EXEC_DEFAULT')
         return {'RUNNING_MODAL'}
 
     def cancel(self, context):

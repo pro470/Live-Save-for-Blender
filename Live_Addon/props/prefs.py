@@ -17,6 +17,7 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
     def update_live_save(self, context):
         if self.is_enabled:
             bpy.ops.wm.live_save_message_handler('EXEC_DEFAULT')
+            bpy.ops.wm.user_action_detector('EXEC_DEFAULT')
 
     Timer: bpy.props.FloatProperty(
         name="Timer",
