@@ -1,7 +1,8 @@
 import bpy
 import importlib
+from .. import props
 
-props_module1 = importlib.import_module("Live Save.Live_Addon.props.Live_Addon")
+props_module1 = props.Live_Addon
 
 
 # Use props_module.addon here

@@ -1,7 +1,8 @@
 import importlib
 import bpy
+from .. import props
 
-props_module = importlib.import_module("Live Save.Live_Addon.props.preference")
+props_module = props.preference
 
 
 

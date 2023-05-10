@@ -5,7 +5,6 @@ from . import file_path
 from . import comparison
 import importlib
 
-props_module = importlib.import_module("Live Save.Live_Addon.props.preference")
 
 fph = file_path
 

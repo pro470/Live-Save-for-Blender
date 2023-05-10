@@ -55,6 +55,7 @@ class LiveSavePanel(bpy.types.Panel):
         row.prop(addon_prefs, "dynamic_save", text="dynamic Save")
 
         layout.separator()
+
         layout.operator("wm.save_as_mainfile_with_browser")
 
         layout.separator()

@@ -4,8 +4,9 @@ import pprint
 import bpy
 from .. import utils
 import importlib
+from .. import props
 
-props_module = importlib.import_module("Live Save.Live_Addon.props.preference")
+props_module = props.preference
 from .. import handlers
 # Use props_module.addon here
 

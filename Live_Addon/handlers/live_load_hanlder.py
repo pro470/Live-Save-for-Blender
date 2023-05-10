@@ -1,9 +1,10 @@
 import bpy
 import importlib
 from ..timer import save_version as sv
+from .. import props
 
 
-utils_module = importlib.import_module("Live Save.Live_Addon.props.preference")
+utils_module = props.preference
 # Use props_module.addon here
 
 
