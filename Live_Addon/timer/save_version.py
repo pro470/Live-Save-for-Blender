@@ -5,7 +5,12 @@ import shutil
 
 def save_version():
     # Get the current Blender file path
-    filepath = bpy.data.filepath
+    if bpy.data.is_saved:
+        filepath = bpy.data.filepath
+    elif os.path.exists(bpy.context.window_manager.my_addon_props.file_path):
+        filepath = bpy.context.window_manager.my_addon_props.file_path
+    else:
+        return bpy.context.window_manager.my_addon_props.version_timer
 
     # Extract the project name without the file extension
     project_name = os.path.splitext(os.path.basename(filepath))[0]
