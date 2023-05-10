@@ -1,3 +1,5 @@
+import re
+
 from . import props
 from . import ops
 from . import handlers
@@ -21,6 +23,8 @@ def unregister():
     timer.unregister()
     ops.unregister()
     file_path12 = bpy.context.window_manager.my_addon_props.file_path
-    if os.path.exists(file_path12):
+    blend_match = r"\.blend"
+    matched_blend = re.search(blend_match, file_path12)
+    if os.path.exists(file_path12) and matched_blend:
         os.remove(file_path12)
     props.unregister()
