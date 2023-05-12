@@ -60,6 +60,10 @@ class LiveSavePanel(bpy.types.Panel):
 
         layout.separator()
 
+        layout.operator("live_save.save_p_version", text="Save Permenant Version")
+
+        layout.separator()
+
         if addon_prefs.is_enabled:
             layout.operator("wm.live_save_message_handler", text="Start Live Save", emboss=False)
         else:

@@ -64,7 +64,6 @@ class LiveSaveMessageHandler(bpy.types.Operator):
         start_time = datetime.datetime.now()
         utils.saving_function.save_blend_file()
         utils.saving_function.save_image_textures()
-        utils.saving_function.save_image_udim_textures()
         end_time = datetime.datetime.now()
         execution_time = end_time - start_time
         addon_prefs = props_module.prefs()

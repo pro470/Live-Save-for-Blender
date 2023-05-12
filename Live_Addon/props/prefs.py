@@ -58,6 +58,38 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         default=True,
     )
 
+    image_format: bpy.props.EnumProperty(
+        name="Image Format",
+        description="Image Format",
+        items=[
+            ('PNG', 'PNG', ' save images with the PNG format'),
+            ('JPEG', 'JPEG', 'save images with the JPEG format'),
+            ('BMP', 'BMP', 'save images with the BMP format'),
+            ('TARGA', 'TARGA', 'save images with the TARGA format'),
+            ('OPEN_EXR', 'OPEN_EXR', 'save images with the OPEN_EXR format'),
+            ('HDR', 'HDR', 'save images with the HDR format'),
+            ('TIFF', 'TIFF', 'save images with the TIFF format'),
+            ('AVI_JPEG', 'AVI_JPEG', 'save images with the AVI_JPEG format'),
+            ('AVI_RAW', 'AVI_RAW', 'save images with the AVI_RAW format'),
+            ('FRAMESERVER', 'FRAMESERVER', 'save images with the FRAMESERVER format'),
+            ('Cineon', 'Cineon', 'save images with the Cineon format'),
+            ('DPX', 'DPX', 'save images with the DPX format'),
+            ('OpenEXR_MULTILAYER', 'OpenEXR_MULTILAYER', 'save images with the OpenEXR_MULTILAYER format'),
+            ('JP2', 'JP2', 'save images with the JP2 format'),
+            ('IRIS', 'IRIS', 'save images with the IRIS format'),
+            ('J2C', 'J2C', 'save images with the J2C format'),
+            ('webp', 'webp', 'save images with the webp format')
+        ],
+        default='PNG',
+    )
+
+    image_file_path: bpy.props.StringProperty(
+        name='Image File Path',
+        description='The directory where initial saves will be stored',
+        default=file_path.get_default_path(),
+        subtype='FILE_PATH'
+    )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "is_enabled")
@@ -65,3 +97,5 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         layout.prop(self, "livesavede")
         layout.prop(self, "background_save")
         layout.prop(self, "dynamic_save")
+        layout.prop(self, "image_format")
+        layout.prop(self, "image_file_path")

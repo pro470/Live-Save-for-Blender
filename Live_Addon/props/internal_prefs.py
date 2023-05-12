@@ -1,5 +1,7 @@
 import bpy
 from ..timer import save_version
+from .. import utils
+fph = utils.file_path
 
 
 class MyAddonProperties(bpy.types.PropertyGroup):
@@ -54,6 +56,12 @@ class MyAddonProperties(bpy.types.PropertyGroup):
         default=1,
         step=1,
         min=1
+    )
+
+    p_version_path: bpy.props.StringProperty(
+        name="Version Path",
+        description="Enter file path",
+        default="Bernd"
     )
 
 

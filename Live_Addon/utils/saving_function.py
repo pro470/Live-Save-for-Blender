@@ -3,6 +3,7 @@ import os
 import datetime
 from . import file_path
 from . import comparison
+from . import common
 import importlib
 
 
@@ -35,30 +36,13 @@ def save_image_textures():
                 if img.filepath:
                     img.save()
                 else:
-                    documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
-                    images_dir = os.path.join(documents_dir, "Images from Blender")
-                    os.makedirs(images_dir, exist_ok=True)
-                    current_time_images2 = datetime.datetime.now().strftime("%Y.%m.%d_%H-%M-%S")
-                    img.filepath = os.path.join(images_dir, img.name + current_time_images2 + ".png")
+                    img.filepath = file_path.make_image_file_path(img.name)
                     img.save()
         except Exception as e:
             print(str(e))
-
-
-def save_image_udim_textures():
-    for img in bpy.data.images:
-        try:
-            if img.is_dirty:
-                if not img.filepath:
-                    documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
-                    current_time_images1 = datetime.datetime.now().strftime("%Y.%m.%d_%H-%M-%S")
-                    images_dir = os.path.join(documents_dir, "Images from Blender")
-                    os.makedirs(images_dir, exist_ok=True)
-                    udim = '<UDIM>'
-                    img.filepath = os.path.join(images_dir, img.name + current_time_images1 + udim + ".png")
-                    img.save()
-        except Exception as e:
-            print(str(e))
+            if not os.path.exists(img.filepath):
+                img.filepath = file_path.make_image_file_path_udim(img.name)
+                img.save()
 
 
 def save_blend_file():
