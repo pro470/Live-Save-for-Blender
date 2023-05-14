@@ -18,12 +18,13 @@ class save_p_version(bpy.types.Operator):
         matched_blend = re.search(self.blend_match, file_path12)
         if bpy.data.is_saved:
             filepath = bpy.data.filepath
-            project_name = os.path.basename(filepath)
+            project_name = os.path.splitext(os.path.basename(filepath))[0]
             p_version_folder_name = f"{project_name}_permenant_version"
             p_version_folder_path = os.path.join(os.path.dirname(filepath), p_version_folder_name)
 
             if not os.path.exists(p_version_folder_path):
                 os.makedirs(p_version_folder_path, exist_ok=True)
+            bpy.context.window_manager.my_addon_props.p_version_path = p_version_folder_path
 
             version_files = sorted([f for f in os.listdir(p_version_folder_path) if f.endswith(".blend")])
             for i in range(len(version_files)):

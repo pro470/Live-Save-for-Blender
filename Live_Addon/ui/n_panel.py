@@ -20,6 +20,12 @@ class LiveSavePanel(bpy.types.Panel):
         row = layout.row()
         row.prop(addon_prefs, "is_enabled", text="Enable Live Save")
 
+        row = layout.row()
+        row.prop(addon_prefs, "background_save", text="Background Save")
+
+        row = layout.row()
+        row.prop(addon_prefs, "dynamic_save", text="dynamic Save")
+
         layout.separator()
 
         #only draw when dynamic save is enabled
@@ -27,40 +33,11 @@ class LiveSavePanel(bpy.types.Panel):
             row = layout.row()
             row.prop(addon_prefs, "Timer", text="Timer")
 
-            layout.separator()
 
-        row = layout.row()
-        row.prop(myaddonprops, "is_enabled_version", text="Enable Version")
-
-        layout.separator()
-
-        #only draw when version is enabled
-        if myaddonprops.is_enabled_version:
-            row = layout.row()
-            row.prop(myaddonprops, "version_count", text="Versions Count")
 
             layout.separator()
-
-            row = layout.row()
-            row.prop(myaddonprops, "version_timer", text="Timer Version")
-
-            layout.separator()
-
-        row = layout.row()
-        row.prop(addon_prefs, "background_save", text="Background Save")
-
-        layout.separator()
-
-        row = layout.row()
-        row.prop(addon_prefs, "dynamic_save", text="dynamic Save")
-
-        layout.separator()
 
         layout.operator("wm.save_as_mainfile_with_browser")
-
-        layout.separator()
-
-        layout.operator("live_save.save_p_version", text="Save Permenant Version")
 
         layout.separator()
 

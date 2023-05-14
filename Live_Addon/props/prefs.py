@@ -90,6 +90,12 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         subtype='FILE_PATH'
     )
 
+    auto_start_save: bpy.props.BoolProperty(
+        name="Auto Start Save",
+        description="Enable or disable Auto Start Save",
+        default=False,
+    )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "is_enabled")
@@ -99,3 +105,4 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         layout.prop(self, "dynamic_save")
         layout.prop(self, "image_format")
         layout.prop(self, "image_file_path")
+        layout.prop(self, "auto_start_save")

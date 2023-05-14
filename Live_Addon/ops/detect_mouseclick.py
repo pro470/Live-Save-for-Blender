@@ -10,7 +10,8 @@ class UserActionDetector(bpy.types.Operator):
     bl_label = "User Action Detector"
 
     def modal(self, context, event):
-        if event.type in {'LEFTMOUSE', 'RIGHTMOUSE'} and event.value == 'RELEASE':
+        #i want to add the enter key to the list of keys that will trigger the operator
+        if event.type in {'LEFTMOUSE', 'RIGHTMOUSE', 'RET'} and event.value == 'RELEASE':
             print("User action detected")
             bpy.context.window_manager.my_addon_props.mouse_detect = True
             addon_prefs = props_module.prefs()

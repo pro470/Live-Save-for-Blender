@@ -7,6 +7,10 @@ class SaveAsMainfileOperator(bpy.types.Operator):
     bl_label = "Save As Mainfile with Browser"
     filepath: StringProperty(subtype='FILE_PATH')
 
+    @classmethod
+    def poll(cls, context):
+        return not bpy.data.is_saved
+
     def execute(self, context):
         # Add ".blend" to the end of the filepath
         filepath_blend = self.filepath + ".blend"

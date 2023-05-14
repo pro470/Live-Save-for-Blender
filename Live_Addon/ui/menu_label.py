@@ -39,4 +39,5 @@ def redraw_menu():
             for region in area.regions:
                 if region.type == 'UI':
                     region.tag_redraw()
+    return 0.1
 
