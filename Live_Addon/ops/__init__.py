@@ -7,6 +7,7 @@ from . import load_p_version_pre
 from . import load_p_version_post
 from . import first_p_version
 from . import last_p_version
+from . import open_original
 
 
 def register():
@@ -18,6 +19,7 @@ def register():
     bpy.utils.register_class(load_p_version_post.LiveSaveLoadNext)
     bpy.utils.register_class(first_p_version.LiveSaveLoadFirst)
     bpy.utils.register_class(last_p_version.LiveSaveLoadLast)
+    bpy.utils.register_class(open_original.LiveSaveLoadOriginal)
 
 
 def unregister():
@@ -29,3 +31,4 @@ def unregister():
     bpy.utils.unregister_class(load_p_version_post.LiveSaveLoadNext)
     bpy.utils.unregister_class(first_p_version.LiveSaveLoadFirst)
     bpy.utils.unregister_class(last_p_version.LiveSaveLoadLast)
+    bpy.utils.unregister_class(open_original.LiveSaveLoadOriginal)

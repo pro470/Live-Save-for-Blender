@@ -150,3 +150,41 @@ def file_path_version_open(number):
     # check if the new filepath exists
     if os.path.exists(new_filepath):
         bpy.ops.wm.open_mainfile(filepath=new_filepath)
+
+def go_to_original():
+    original_file_path = ""
+    file_path = bpy.data.filepath
+    matched = re.search(r"_permenant_version", file_path)
+
+    if matched:
+        directory, filename = os.path.split(file_path)
+        filename, ext = os.path.splitext(filename)
+        new_filename = directory.replace("_permenant_version", "")
+        dirname = os.path.dirname(directory)
+        original_file_path = os.path.join(dirname, new_filename + ext)
+        return original_file_path
+    else:
+        print("This is the original file!")
+        return original_file_path
+
+
+def go_to_original_test():
+    new_filepath = go_to_original()
+
+    # check if the new filepath exists
+    if os.path.exists(new_filepath):
+        print(f"{new_filepath} already exists!")
+        return True
+    else:
+        print(f"{new_filepath} does not exist.")
+        return False
+
+def go_to_original_open():
+    new_filepath = go_to_original()
+    # check if the new filepath exists
+    if os.path.exists(new_filepath):
+        bpy.ops.wm.open_mainfile(filepath=new_filepath)
+
+
+
+
