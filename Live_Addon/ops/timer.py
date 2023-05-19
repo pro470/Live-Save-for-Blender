@@ -62,8 +62,11 @@ class LiveSaveMessageHandler(bpy.types.Operator):
 
     def my_thread_function(self):
         start_time = datetime.datetime.now()
-        utils.saving_function.save_blend_file()
-        utils.saving_function.save_image_textures()
+        try:
+            utils.saving_function.save_blend_file()
+            utils.saving_function.save_image_textures()
+        except Exception as e:
+            print(e)
         end_time = datetime.datetime.now()
         execution_time = end_time - start_time
         addon_prefs = props_module.prefs()

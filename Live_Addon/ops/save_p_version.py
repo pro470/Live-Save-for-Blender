@@ -24,7 +24,6 @@ class save_p_version(bpy.types.Operator):
 
             if not os.path.exists(p_version_folder_path):
                 os.makedirs(p_version_folder_path, exist_ok=True)
-            bpy.context.window_manager.my_addon_props.p_version_path = p_version_folder_path
 
             version_files = sorted([f for f in os.listdir(p_version_folder_path) if f.endswith(".blend")])
             for i in range(len(version_files)):

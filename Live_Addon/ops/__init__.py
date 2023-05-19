@@ -1,4 +1,5 @@
 import bpy
+from .. import props
 from . import timer
 from . import save_with_browser
 from . import detect_mouseclick
@@ -8,6 +9,8 @@ from . import load_p_version_post
 from . import first_p_version
 from . import last_p_version
 from . import open_original
+
+addonpref = props.preference.prefs()
 
 
 def register():

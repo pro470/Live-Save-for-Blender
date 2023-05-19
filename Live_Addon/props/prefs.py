@@ -96,6 +96,18 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         default=False,
     )
 
+    turn_on_off_p_version: bpy.props.BoolProperty(
+        name="Turn On/Off P Version",
+        description="Enable or disable Turn On/Off P Version",
+        default=False,
+    )
+
+    turn_on_off_version: bpy.props.BoolProperty(
+        name="Turn On/Off Version",
+        description="Enable or disable Turn On/Off Version",
+        default=False,
+    )
+
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "is_enabled")
@@ -106,3 +118,5 @@ class LiveSavePreferences(bpy.types.AddonPreferences):
         layout.prop(self, "image_format")
         layout.prop(self, "image_file_path")
         layout.prop(self, "auto_start_save")
+        layout.prop(self, "turn_on_off_p_version")
+        layout.prop(self, "turn_on_off_version")

@@ -1,5 +1,6 @@
 import bpy
 import os
+import shutil
 from .. import props
 
 
