@@ -16,8 +16,19 @@ class LiveSavePVersionPanel(bpy.types.Panel):
         layout = self.layout
         addon_prefs = props.preference.prefs()
         myaddonprops = bpy.context.window_manager.my_addon_props
+        WindowManager = context.window_manager
 
+        if WindowManager.my_list:
+            row = layout.box().column()
+            row.template_list("MY_UL_List", "The_List", WindowManager,
+                              "my_list", WindowManager, "list_index")
+            raw = row.row(align=True)
+            raw.operator('my_list.new_item', text='NEW', icon='ADD')
+            raw.operator('my_list.delete_item', text='REMOVE', icon='REMOVE')
 
+            item = WindowManager.my_list[WindowManager.list_index]
+            row.operator('my_list.open_p_version_index', text="", icon='GREASEPENCIL')
+            #row.prop(item, "name")
 
         bx = layout.box().column()
         sx = bx.grid_flow(align=True)

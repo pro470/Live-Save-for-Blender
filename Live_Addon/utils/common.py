@@ -128,6 +128,8 @@ def new_file_path_func(number):
 
                 # if not, start with version 1
                 new_version = number
+                if new_version == "first":
+                    new_version = 1
                 new_filename = f"{filename}_v{new_version:03}{ext}"
 
                 # create the new filepath with the new filename
@@ -184,6 +186,15 @@ def go_to_original_open():
     # check if the new filepath exists
     if os.path.exists(new_filepath):
         bpy.ops.wm.open_mainfile(filepath=new_filepath)
+
+
+def update_index(self, context):
+    index = bpy.context.window_manager.list_index
+    my_list = bpy.context.window_manager.my_list
+
+    file_path = my_list[index].p_version_file_path
+    if os.path.exists(file_path):
+        bpy.ops.wm.open_mainfile(filepath=file_path)
 
 
 

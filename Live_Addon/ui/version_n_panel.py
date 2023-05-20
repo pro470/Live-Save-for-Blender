@@ -14,7 +14,7 @@ class LiveSaveVersionPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        addon_prefs = props.preference.prefs()
+        props.preference.prefs()
         myaddonprops = bpy.context.window_manager.my_addon_props
 
         bx = layout.box().column()

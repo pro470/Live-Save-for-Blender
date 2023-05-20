@@ -12,26 +12,16 @@ from . import open_original
 
 addonpref = props.preference.prefs()
 
+CLASSES = [
+    timer.LiveSaveMessageHandler,
+    save_with_browser.SaveAsMainfileOperator,
+    detect_mouseclick.UserActionDetector,
+    save_p_version.save_p_version,
+    load_p_version_pre.LiveSaveLoadPre,
+    load_p_version_post.LiveSaveLoadNext,
+    first_p_version.LiveSaveLoadFirst,
+    last_p_version.LiveSaveLoadLast,
+    open_original.LiveSaveLoadOriginal,
+]
 
-def register():
-    bpy.utils.register_class(timer.LiveSaveMessageHandler)
-    bpy.utils.register_class(save_with_browser.SaveAsMainfileOperator)
-    bpy.utils.register_class(detect_mouseclick.UserActionDetector)
-    bpy.utils.register_class(save_p_version.save_p_version)
-    bpy.utils.register_class(load_p_version_pre.LiveSaveLoadPre)
-    bpy.utils.register_class(load_p_version_post.LiveSaveLoadNext)
-    bpy.utils.register_class(first_p_version.LiveSaveLoadFirst)
-    bpy.utils.register_class(last_p_version.LiveSaveLoadLast)
-    bpy.utils.register_class(open_original.LiveSaveLoadOriginal)
-
-
-def unregister():
-    bpy.utils.unregister_class(timer.LiveSaveMessageHandler)
-    bpy.utils.unregister_class(save_with_browser.SaveAsMainfileOperator)
-    bpy.utils.unregister_class(detect_mouseclick.UserActionDetector)
-    bpy.utils.unregister_class(save_p_version.save_p_version)
-    bpy.utils.unregister_class(load_p_version_pre.LiveSaveLoadPre)
-    bpy.utils.unregister_class(load_p_version_post.LiveSaveLoadNext)
-    bpy.utils.unregister_class(first_p_version.LiveSaveLoadFirst)
-    bpy.utils.unregister_class(last_p_version.LiveSaveLoadLast)
-    bpy.utils.unregister_class(open_original.LiveSaveLoadOriginal)
+register, unregister = bpy.utils.register_classes_factory(CLASSES)

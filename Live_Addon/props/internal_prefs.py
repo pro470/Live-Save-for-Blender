@@ -1,4 +1,6 @@
 import bpy
+from bpy.props import StringProperty
+from bpy.types import PropertyGroup
 from ..timer import save_version
 from .. import utils
 fph = utils.file_path
@@ -65,3 +67,15 @@ class MyAddonProperties(bpy.types.PropertyGroup):
     )
 
 
+class ListItem(PropertyGroup):
+    """Group of properties representing an item in the list."""
+
+    name: StringProperty(
+           name="Name",
+           description="A name for this item",
+           default="Untitled")
+
+    p_version_file_path: StringProperty(
+           name="Any other property you want",
+           description="",
+           default="")
